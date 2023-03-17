@@ -4,9 +4,9 @@ import sys
 import time
 from Adafruit_IO import MQTTClient
 
-AIO_USERNAME = "hieu301203"
-AIO_KEY = "aio_Lvdx74y98BevAlunNLR1BWQU3npn"
-AIO_FEED_IDS = ["led", "bbc-pump",]
+AIO_USERNAME = "your user name"
+AIO_KEY = "your key"
+AIO_FEED_IDS = ["your-feed-light", "your-feed-fan",]
 
 
 def connected(client):
