@@ -5,8 +5,8 @@ import time
 from Adafruit_IO import MQTTClient
 
 AIO_USERNAME = "hieu301203"
-AIO_KEY = "aio_Lvdx74y98BevAlunNLR1BWQU3npn"
-AIO_FEED_IDS = ["led", "bbc-pump",]
+AIO_KEY = "aio_fTjA96zLzMXYJl9nx447nDP1C4EQ"
+AIO_FEED_IDS = ["led", "bbc-pump","password"]
 
 
 def connected(client):
@@ -72,6 +72,10 @@ def processData(data):
                 client.publish("bbc-humi", splitData[2])
             elif splitData[1] == "LIGHT":
                 client.publish("bbc-led", splitData[2])
+            elif splitData[1] == "PASS":
+                client.publish("password", splitData[2])
+            elif splitData[1] == "CHECK":
+                client.publish("check-pass", splitData[2])
         # if splitData[0] == "2":           # node 2
         #     if splitData[1] == "TEMP":
         #         client.publish("bbc-temp1", splitData[2])
