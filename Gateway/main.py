@@ -31,7 +31,7 @@ def disconnected(client):
 
 
 def message(client, feed_id, payload):
-    print("Nhan du lieu: " + payload)
+    print("Receiver data from " + client + "/" + feed_id + " : " + payload)
     if feed_id == "fan":
         payload = "f" + payload
     if isMicrobitConnected:
