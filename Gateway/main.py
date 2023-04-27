@@ -4,15 +4,15 @@ import sys
 import time
 from Adafruit_IO import MQTTClient
 
-<<<<<<< HEAD
-AIO_USERNAME = "hieu301203"
-AIO_KEY = "aio_fTjA96zLzMXYJl9nx447nDP1C4EQ"
-AIO_FEED_IDS = ["led", "bbc-pump","password"]
-=======
-AIO_USERNAME = "your user name"
-AIO_KEY = "your key"
-AIO_FEED_IDS = ["your-feed-light", "your-feed-fan",]
->>>>>>> 4cae6cfd35f2ccf30629abb53b4b6a30b52847c8
+
+AIO_USERNAME = "LamVinh"
+AIO_KEY = "aio_ulFH81sAHMuNlBuRkeCNZr5bCm0L"
+AIO_FEED_IDS = ["button1", "fan"]
+# =======
+# AIO_USERNAME = "your user name"
+# AIO_KEY = "your key"
+# AIO_FEED_IDS = ["your-feed-light", "your-feed-fan"]
+# >>>>>>> 4cae6cfd35f2ccf30629abb53b4b6a30b52847c8
 
 
 def connected(client):
@@ -32,6 +32,8 @@ def disconnected(client):
 
 def message(client, feed_id, payload):
     print("Nhan du lieu: " + payload)
+    if feed_id == "fan":
+        payload = "f" + payload
     if isMicrobitConnected:
         ser.write((str(payload) + "#").encode())
 
@@ -73,15 +75,17 @@ def processData(data):
     try:
         if splitData[0] == "1":             # node 1
             if splitData[1] == "TEMP":
-                client.publish("bbc-temp", splitData[2])
+                client.publish("temp-info", splitData[2])
             elif splitData[1] == "HUMI":
-                client.publish("bbc-humi", splitData[2])
+                client.publish("humi-info", splitData[2])
             elif splitData[1] == "LIGHT":
-                client.publish("bbc-led", splitData[2])
+                client.publish("light2", splitData[2])
             elif splitData[1] == "PASS":
                 client.publish("password", splitData[2])
-            elif splitData[1] == "CHECK":
-                client.publish("check-pass", splitData[2])
+            elif splitData[1] == "MOTION":
+                client.publish("motion", splitData[2])
+            # elif splitData[1] == "CHECK":
+            #     client.publish("check-pass", splitData[2])
         # if splitData[0] == "2":           # node 2
         #     if splitData[1] == "TEMP":
         #         client.publish("bbc-temp1", splitData[2])
