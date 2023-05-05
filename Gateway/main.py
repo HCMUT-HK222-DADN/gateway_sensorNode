@@ -82,8 +82,8 @@ def processData(data):
                 client.publish("humi-info", splitData[2])
             elif splitData[1] == "LIGHT":
                 client.publish("light2", splitData[2])
-            # elif splitData[1] == "PASS":
-            #     client.publish("password", splitData[2])
+            elif splitData[1] == "PASS":
+                 client.publish("password", splitData[2])
             elif splitData[1] == "MOTION":
                 client.publish("motion", splitData[2])
             elif splitData[1] == "CHECK":
