@@ -6,11 +6,11 @@ from Adafruit_IO import MQTTClient
 
 
 AIO_USERNAME = "LamVinh"
-AIO_KEY = "aio_ulFH81sAHMuNlBuRkeCNZr5bCm0L"
-AIO_FEED_IDS = ["button1", "fan"]
+AIO_KEY = "aio_HUyW98JRfR6disI1VkEDqEZ9f7G0"
+AIO_FEED_IDS = ["button1", "fan", "password"]
 # =======
 # AIO_USERNAME = "your user name"
-# AIO_KEY = "your key"
+# AIO_KEY = "your key",
 # AIO_FEED_IDS = ["your-feed-light", "your-feed-fan"]
 # >>>>>>> 4cae6cfd35f2ccf30629abb53b4b6a30b52847c8
 
@@ -31,9 +31,11 @@ def disconnected(client):
 
 
 def message(client, feed_id, payload):
-    print("Receiver data from " + client + "/" + feed_id + " : " + payload)
+    print("Receiver data from: " + payload)
     if feed_id == "fan":
         payload = "f" + payload
+    elif feed_id == "password":
+        payload = "p" + payload
     if isMicrobitConnected:
         ser.write((str(payload) + "#").encode())
 
@@ -80,17 +82,12 @@ def processData(data):
                 client.publish("humi-info", splitData[2])
             elif splitData[1] == "LIGHT":
                 client.publish("light2", splitData[2])
-            elif splitData[1] == "PASS":
-                client.publish("password", splitData[2])
+            # elif splitData[1] == "PASS":
+            #     client.publish("password", splitData[2])
             elif splitData[1] == "MOTION":
                 client.publish("motion", splitData[2])
-            # elif splitData[1] == "CHECK":
-            #     client.publish("check-pass", splitData[2])
-        # if splitData[0] == "2":           # node 2
-        #     if splitData[1] == "TEMP":
-        #         client.publish("bbc-temp1", splitData[2])
-        #     elif splitData[1] == "HUMI":
-        #         client.publish("bbc-humi1", splitData[2])
+            elif splitData[1] == "CHECK":
+                 client.publish("check", splitData[2])
     except:
         pass
 
